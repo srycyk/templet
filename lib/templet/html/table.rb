@@ -20,7 +20,7 @@ module Templet
                     if title.respond_to?(:call)
                       th title.(self, opaque_heading, opaque_row)
                     else
-                      th heading(title)
+                      th heading(title.to_s)
                     end
                   end
                 end
@@ -56,7 +56,7 @@ module Templet
       end
 
       def heading(title)
-        title[0] == '_' ? '' : title.capitalize
+        title[0] == '_' ? '' : title.capitalize.tr('_', ' ')
       end
     end
   end
