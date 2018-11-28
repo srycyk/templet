@@ -21,9 +21,10 @@ It has three main sections:
 
 3. Helper methods for rendering HTML tables and lists.
 
-Incidentally, there is another renderer class, *Templet::Renderers::ERb*,
+_Incidentally, and if such a need arises,
+there is another renderer class, *Templet::Renderers::ERb*,
 that you may use to insert markup inside of an ERb layout,
-either on file or as a string.
+either on file or as a string._
 
 ## The basic DSL (Renderer)
 
@@ -80,7 +81,7 @@ and even a full-blown Rails Scaffolding alternative.
 
 But there's no need for you to embark on such a venture yourself,
 as these things are implemented in the related gem:
-[templet\_rails](templet_rails).
+[templet\_rails](https://github.com/srycyk/templet_rails).
 
 ## HTML Helpers
 
@@ -89,7 +90,7 @@ that provide a shortened way to render HTML tables and lists.
 Their content is determined by a Ruby Hash or Array,
 which is given as input.
 
-Examples of using these are given at the end.
+Examples of using these are given towards the end.
 
 ## Renderer Usage
 
@@ -143,7 +144,8 @@ This produces the following HTML:
 > Note that the code blocks (passed to the *Renderer*)
 > are not run in the lexical context that blocks normally are.
 > The blocks are actually executed inside of an instance of *Renderer*
-> which inherits from *BasicObject* - a threadbare class of very few methods.
+> which inherits from *BasicObject* -
+> which is a threadbare class of very few methods.
 > It's up to you to provide the lookup context(s),
 > which are passed into the *Renderer's* constructor.
 
@@ -256,10 +258,10 @@ to rendering markup.
 
 You begin with a Layout, which, typically, contains a number of Partials.
 
-There is no need to have more than a single Layout,
-since partials can be nested inside one another.
+There's no need to have more than a single Layout,
+since Partials can be nested inside one another.
 
-They perform much the same function as their namesakes in Rails.
+Together, they perform much the same function as their namesakes in Rails.
 
 ### Examples of a Layout with Partials
 
@@ -361,6 +363,8 @@ In these examples, a *nil* value is passed to the constructor,
 but in application code, this will be, in nearly all cases,
 replaced by an instance of a *Renderer*.
 
+> To load these claases you must add: `require 'templet/html'`.
+
 ### An Unordered List
 
 ```ruby
@@ -380,7 +384,8 @@ This produces the following HTML:
 
 ### A Definition List
 
-In basic cases, you pass in a Hash, where the key is the title (the *dt* tag)
+In basic cases, you pass in a Hash,
+where the key is the title (the *dt* tag),
 and the value is the data (the *dd* tag).
 This is done as follows:
 
@@ -432,14 +437,16 @@ This produces the following HTML:
 ### A Table
 
 To render an HTML table you pass to the *call* method,
-a control Hash (as set out above), and a list of records.
+a control Hash (as set out just above),
+and a list of records, obviously, with a table row for each record.
 
 ```ruby
 controls = { 'Title 1' => nil, # shows the whole of the 'numbers' hash
                                # if an array was given, it'd be indexed
              'Title 2' => 'Two', # shows the 'numbers' hash entry 'Two'
              # calls this proc - the first param is a Renderer instance
-             'Title 3' => proc {|_, numbers| numbers['Three'] } }
+             'Title 3' => proc {|_, numbers| numbers['Three'] }
+           }
 
 Templet::Html::Table.new(nil).(controls, [{"One"=>"First", "Two"=>"Second", "Three"=>"Third"}])
 ```
@@ -504,7 +511,7 @@ of the same name (i.e. *tag*), higher up in the inheritance hierarchy.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'templet'
+    gem 'templet'
 ```
 
 And then execute:
@@ -519,16 +526,7 @@ Or install it yourself as:
     $ gem install templet
 ```
 
-Or download the packaged gem and copy the classes (in *lib/templet* and below)
-into your own local directory. Perhaps in *lib/templet*.
-
-To call the API:
-
-```ruby
-require 'templet'
-```
-
-## License
+## Licence
 
 The gem is available as open source under the terms
 of the [MIT License](https://opensource.org/licenses/MIT).
