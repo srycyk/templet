@@ -171,26 +171,23 @@ require 'templet'
 
   # The first two arguments are contexts for method lookups
   #
-  # The final argument list local variables which take precendence
+  # The final argument list local variables which take precedence
   #
   # The block renders the markup
   # Note the shortcut call, this call is stated in full in the above example
   html = Templet.(self, Lister.new, title: 'A Title') do
            more_content = 'More content'
 
-           # +title+ is (in effect) a local variable passed into the constru
-ctor
+           # +title+ is (in effect) a local variable passed into the constructor
            [ -> { h1(title, :strong) }, # you can include anything callable
 
-             # Calls +items+ from Lister instance, given as a contructor arg
-ument
+             # Calls +items+ from Lister instance, given as a constructor argument
              # The +_p+ call renders a <p> tag
              #   without the underscore the Kernel#p method would override
              _p(ul(:list_unstyled) { items.map {|item| li item } }),
 
              div(:row) do
-               # Calls +content+ because +self+ is passed into the contructo
-r
+               # Calls +content+ because +self+ is passed into the constructor
                # +col_tag+ is a closure variable defined above
                [ col_tag.(content), col_tag.(more_content), col_tag.('...') 
 ]
@@ -363,7 +360,7 @@ In these examples, a *nil* value is passed to the constructor,
 but in application code, this will be, in nearly all cases,
 replaced by an instance of a *Renderer*.
 
-> To load these claases you must add: `require 'templet/html'`.
+> To load these classes you must add: `require 'templet/html'`.
 
 ### An Unordered List
 
