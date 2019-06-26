@@ -8,8 +8,11 @@ module Templet
       # +contexts+:: A list containing objects whose methods will be looked up
       # +locals+:: Objects you can reference by the name given as the key
       def initialize(renderer, *contexts, **locals)
-        self.renderer = renderer&.new_instance(self, *contexts, **locals) ||
-                        Renderer.new(self, *contexts, **locals)
+        self.renderer = if renderer
+                          renderer.new_instance(self, *contexts, **locals)
+                        else
+                          Renderer.new(self, *contexts, **locals)
+                        end
       end
 
       # Entry point - the block returns markup

@@ -16,6 +16,6 @@ module Templet
   end
 
   def self.erb(template_path, **locals, &block)
-    Renderers::Erb.(template_path, **locals, &block)
+    Renderers::ERb.(template_path, **locals, &block)
   end
 end
