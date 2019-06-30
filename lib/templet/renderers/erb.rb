@@ -71,7 +71,7 @@ module Templet
         else
           path = source_path(call_stack, 0)
 
-          IO.read(path).split("__END__", 2)&.last
+          IO.read(path).split(/\s__END__\s/, 2)&.last
         end
       end
 

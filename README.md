@@ -23,7 +23,7 @@ It has three main sections:
 
 _Incidentally, and if such a need arises,
 there is another renderer class, *Templet::Renderers::ERb*,
-that you may use to insert markup inside of an ERb layout,
+that you may use to insert markup inside of a main ERb layout,
 either on file or as a string._
 
 ## The basic DSL (Renderer)
@@ -83,12 +83,21 @@ But there's no need for you to embark on such a venture yourself,
 as these things are implemented in the related gem:
 [templet\_rails](https://github.com/srycyk/templet_rails).
 
+> There is a third kind of component, *Templet::Component::Template*
+> that renders an auxiliary ERb template, _(like a Rails partial)_.
+> However, this experimental feature is inefficient and, besides,
+> it merely regurgitates existing functionality that this gem
+> sets out to replace!
+> Having said this, there may be some *corner* cases where using this
+> kind of Component will make sense.
+> _This Component isn't explained here, but the tests outline usage._
+
 ## HTML Helpers
 
 Some further classes are included (in the *templet/html/* sub-directory),
-that provide a shortened way to render HTML tables and lists.
-Their content is determined by a Ruby Hash or Array,
-which is given as input.
+that provide a short-hand way to render HTML lists and tables.
+A stardard HTML list is generated from a given Ruby Array, similarly,
+an HTML table (or definition list) is generated from a Ruby Hash.
 
 Examples of using these are given towards the end.
 
@@ -99,7 +108,8 @@ it's best not to construct an instance of a *Renderer* explicitly,
 even though this is illustrated in the examples which follow.
 
 As noted, it's neater to use the *Renderer* implicitly,
-that is, by means of a *Layout* containing a number of *Partials*.
+that is, by means of a *Layout* containing a number of *Partials*,
+which both contain an instance of a *Renderer*.
 
 Still, it is useful to have a grounding in the basic rules and techniques,
 as they apply to the Components as well.
@@ -253,9 +263,9 @@ and you should be able to pick up the rest as you go along.
 As said, Components facilitate a modular (object oriented) approach
 to rendering markup.
 
-You begin with a Layout, which, typically, contains a number of Partials.
+You begin with a Layout, consists of a number of Partials.
 
-There's no need to have more than a single Layout,
+There is often no need to have more than a single Layout,
 since Partials can be nested inside one another.
 
 Together, they perform much the same function as their namesakes in Rails.
@@ -356,7 +366,7 @@ This produces the following HTML:
 
 ## Examples of Rendering HTML Composites
 
-In these examples, a *nil* value is passed to the constructor,
+In these examples, a **nil** value is passed to the constructor,
 but in application code, this will be, in nearly all cases,
 replaced by an instance of a *Renderer*.
 
@@ -381,7 +391,7 @@ This produces the following HTML:
 
 ### A Definition List
 
-In basic cases, you pass in a Hash,
+In the most basic use, you pass in a Hash,
 where the key is the title (the *dt* tag),
 and the value is the data (the *dd* tag).
 This is done as follows:
@@ -411,6 +421,7 @@ If a Symbol is given then it's used as a (Hash) key,
 as in `record[key]`.
 If a Proc is given then it's called with the
 record passed as the first parameter, as in `func.call(record)`.
+_Where *func* is the passed-in Proc_
 
 ```ruby
 record = OpenStruct.new(field_1: 'Value 1', field_2: 'Value 2')
@@ -434,8 +445,8 @@ This produces the following HTML:
 ### A Table
 
 To render an HTML table you pass to the *call* method,
-a control Hash (as set out just above),
-and a list of records, obviously, with a table row for each record.
+a control Hash (as set out for the Definition List just above),
+and a list of records which, obviously, map to a table row.
 
 ```ruby
 controls = { 'Title 1' => nil, # shows the whole of the 'numbers' hash
@@ -522,6 +533,10 @@ Or install it yourself as:
 ```
     $ gem install templet
 ```
+
+Or get it from Github at
+[github.com/srycyk/templet](https://github.com/srycyk/templet).
+
 
 ## Licence
 
