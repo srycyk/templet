@@ -3,7 +3,7 @@ require 'minitest/autorun'
 
 require 'ostruct'
 
-require "templet/html"
+require "templet"
 
 require "test_helpers/xml_predicates"
 

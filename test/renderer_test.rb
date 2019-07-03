@@ -2,6 +2,7 @@
 require 'minitest/autorun'
 
 require "templet"
+
 require "test_helpers/xml_predicates"
 require "test_helpers/renderer_mixin"
 
@@ -17,7 +18,7 @@ require "test_helpers/renderer_mixin"
     end
 
     def html_list
-      -> { ul(:list_unstyled) { [ li('One'), li('Two') ] } }
+      proc { ul(:list_unstyled) { [ li('One'), li('Two') ] } }
     end
 
     def own_helper_method
@@ -97,8 +98,5 @@ require "test_helpers/renderer_mixin"
     it '#respond_to? failure' do
       refute renderer(class_apart.new).respond_to? :no_such_method
     end
-
-=begin
-=end
   end
 

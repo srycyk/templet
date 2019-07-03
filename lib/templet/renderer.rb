@@ -27,7 +27,7 @@ module Templet
 
     # The block contains the markup
     def call(&block)
-      Renderers::ListPresenter.new.(instance_eval &block)
+      Renderers::ListPresenter.new.(instance_eval(&block))
     end
 
     def method_missing(name, *args, &block)

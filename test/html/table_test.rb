@@ -1,7 +1,7 @@
 
 require 'minitest/autorun'
 
-require "templet/html"
+require "templet"
 
 require "test_helpers/xml_predicates"
 

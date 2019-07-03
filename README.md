@@ -21,10 +21,12 @@ It has three main sections:
 
 3. Helper methods for rendering HTML tables and lists.
 
-_Incidentally, and if such a need arises,
+_Incidentally, if such a need arises,
 there is another renderer class, *Templet::Renderers::ERb*,
 that you may use to insert markup inside of a main ERb layout,
 either on file or as a string._
+
+> To load these classes you add the line: `require 'templet'`.
 
 ## The basic DSL (Renderer)
 
@@ -32,6 +34,7 @@ The DSL processing (i.e. HTML rendering) is handled by
 the class, *Templet::Renderer*.
 But don't expect anything earth-shattering,
 as this class breaks no new ground.
+
 It's as simple a DSL as you're likely to come across.
 Also, there are a good few others that are similar,
 e.g. XML Builder, Markaby, Arbre, and Fortitude.
@@ -231,15 +234,19 @@ This produces the following HTML:
 
 ## Notes on Usage
 
+### Return Types
+
 The main quirk is that the *Renderer* only outputs
 the actual return value of a given block.
 That is, statements preceding the very last one won't
 show up in the resultant markup.
 *This behaviour differs from that of most other markup API's.*
 
-A block's return type must be either an array of strings or of *callable*
-entities (which themselves return one or more strings).
-This array can be nested at any depth.
+A block's return type must be either strings or *callable* entities
+(which themselves return one or more strings), or else an array of such.
+If an array is returned, it can  be nested to any depth (as it's flattened).
+
+### Renderer Context
 
 Importantly, the block, passed to *Renderer#call*, is **not**
 executed in its natural local (i.e. lexical) scope.
@@ -251,8 +258,10 @@ as one of the initial arguments.
 *To put this in more practical terms: be aware that if an error does occur,
 its origin may be flagrantly misreported in the stack trace.*
 
+### Further Guidance
+
 The tests have more examples of usage,
-also, the source code is easy to follow and is commented.
+also, the source code is easy to follow and is liberally commented.
 
 But don't dig too deep.
 There's not a lot you need to learn to get started,
@@ -268,7 +277,7 @@ You begin with a Layout, consists of a number of Partials.
 There is often no need to have more than a single Layout,
 since Partials can be nested inside one another.
 
-Together, they perform much the same function as their namesakes in Rails.
+They perform much the same function as their namesakes in Rails.
 
 ### Examples of a Layout with Partials
 
@@ -366,11 +375,9 @@ This produces the following HTML:
 
 ## Examples of Rendering HTML Composites
 
-In these examples, a **nil** value is passed to the constructor,
+In the following examples, a **nil** value is passed to the constructor,
 but in application code, this will be, in nearly all cases,
 replaced by an instance of a *Renderer*.
-
-> To load these classes you must add: `require 'templet/html'`.
 
 ### An Unordered List
 
@@ -536,7 +543,6 @@ Or install it yourself as:
 
 Or get it from Github at
 [github.com/srycyk/templet](https://github.com/srycyk/templet).
-
 
 ## Licence
 

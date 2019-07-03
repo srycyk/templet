@@ -25,7 +25,9 @@ require "templet"
     end
 
     it 'renders list' do
-      assert_match /^a.?b.?c/m, renderer.(list)
+      list_re = /^a.?b.?c/m
+
+      assert_match list_re, renderer.(list)
     end
 
     it 'renders a nested callable' do
