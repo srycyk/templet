@@ -50,9 +50,9 @@ module Templet
 
       # Change underscores to dashes when specifying
       #   XML tag names, attribute names and html classes.
-      # For a single underscore, put in two.
+      # For a single underscore, put in three.
       def dashit(name)
-        (name || '').to_s.tr('_', '-').gsub(/--/, '_') # could be better!
+        (name || '').to_s.tr('_', '-').gsub(/---/, '_') # could be better!
       end
 
       def dash_symbol(value)

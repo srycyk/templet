@@ -110,8 +110,8 @@ require "test_helpers/xml_predicates"
       assert tag?(new_tag(:a_b).(), 'a-b')
     end
 
-    it 'substitutes one underscore for two in tag name' do
-      assert tag?(new_tag(:a__b).(), 'a_b')
+    it 'substitutes one underscore for three in tag name' do
+      assert tag?(new_tag(:a___b).(), 'a_b')
     end
 
     it 'substitutes dash for underscore in tag attribute name' do
